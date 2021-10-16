@@ -1,7 +1,7 @@
 ## ====================
 ##  HARD DISK DRIVE(S):
 ## ====================
-{% for item in ansible_devices | dict2items if item.key.startswith("sd") %}
+{% for item in ansible_devices | dict2items if item.key.startswith("nvme") %}
 # Onboard: {{ item.value.model }} {{ item.value.serial }}
 DRIVE{{ loop.index }} /dev/{{ item.key }}
 {% endfor %}
