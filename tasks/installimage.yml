@@ -1,20 +1,13 @@
 ---
-- name: installimage | lookup for host ip address
-  shell: >-
-    set -o pipefail &&
-    getent hosts {{ inventory_hostname }} | cut -d' ' -f1
-  args:
-    executable: /bin/bash
-  register: host_ip_address
-  failed_when: host_ip_address.stderr or not host_ip_address.stdout
-  changed_when: false
-  delegate_to: localhost
+- name: installimage | set host ip address
+  set_fact:
+    host_ip_address: "{{ ansible_host }}"
 
 - name: installimage | hostname
   block:
     - name: installimage | hostname | check hostname
       assert:
-        that: host_ip_address.stdout != inventory_hostname
+        that: host_ip_address != inventory_hostname
         quiet: true
         fail_msg: >-
           The hostname must be set in case you are using ip addresses
@@ -73,7 +66,9 @@
     mode: 0644
 
 - name: installimage | install the image
-  command: /root/.oldroot/nfs/install/installimage -c /installimage.conf -a
+  shell: "/root/.oldroot/nfs/install/installimage -c /installimage.conf -a"
+  environment:
+    TERM: linux
   changed_when: true
 
 - name: installimage | reboot server
