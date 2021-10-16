@@ -73,3 +73,6 @@ additional_settings:
 
 # reboot after installing the new image
 reboot_installimage: true
+
+# warpet's device-prefix patch
+installimage_device_prefix: nvme
