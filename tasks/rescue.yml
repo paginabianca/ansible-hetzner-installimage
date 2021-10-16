@@ -1,19 +1,10 @@
 ---
 # detect ip address of the host which is needed for server reboot
-- name: rescue | lookup for host ip address
-  shell: >-
-    set -o pipefail &&
-    getent hosts {{ inventory_hostname }} | cut -d' ' -f1
-  args:
-    executable: /bin/bash
-  register: host_ip_address
-  failed_when: host_ip_address.stderr or not host_ip_address.stdout
-  changed_when: false
-  delegate_to: localhost
-
-- name: rescue | set host_ip fact
+# host_ip has to be set in vars. Getting it through `getent` does not work
+# if your server is behind Cloudflare DNS Proxy.
+- name: rescue | host_ip
   set_fact:
-    host_ip: "{{ host_ip_address.stdout|mandatory }}"
+    host_ip: "{{ ansible_host }}"
 
 # generate md5 of the public ssh key which is needed for rescue system authentication
 - name: rescue | ssh
