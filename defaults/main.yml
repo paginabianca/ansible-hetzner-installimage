@@ -20,27 +20,39 @@ hostname:
 # distro os/version to install
 images_map:
   ubuntu:
+    - ver: 21.10
+      code: Ubuntu-2110-impish-amd64-base
     - ver: 20.10
-      code: Ubuntu-2010-groovy
+      code: Ubuntu-2010-groovy-64-minimal
     - ver: 20.04
-      code: Ubuntu-2004-focal
+      code: Ubuntu-2004-focal-64-minimal
     - ver: 18.04
-      code: Ubuntu-1804-bionic
+      code: Ubuntu-1804-bionic-64-minimal
   debian:
     - ver: 10.10
-      code: Debian-1010-buster
+      code: Debian-1010-buster-64-minimal
     - ver: 11.00
-      code: Debian-1100-bullseye
+      code: Debian-1100-bullseye-amd64-base
+    - ver: 11.01
+      code: Debian-1101-bullseye-amd64-base
     - ver: 9.13
-      code: Debian-913-stretch
+      code: Debian-913-stretch-64-minimal
   centos:
+    - ver: 8.5
+      code: CentOS-85-64-minimal
     - ver: 8.4
-      code: CentOS-84
+      code: CentOS-84-64-minimal
     - ver: 7.9
-      code: CentOS-79
+      code: CentOS-79-64-minimal
   archlinux:
     - ver: latest
-      code: archlinux-latest
+      code: archlinux-latest-64-minimal
+  rocky:
+    - ver: 8.5
+      code: Rocky-85-amd64-base
+  alma:
+    - ver: 8.5
+      code: Alma-85-amd64-base
 image:
   distro: ubuntu
   version: 20.04
